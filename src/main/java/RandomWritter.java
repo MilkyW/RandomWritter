@@ -47,6 +47,7 @@ public class RandomWritter {
                     } else {
                         System.out.println("Complete sentence already enabled.");
                     }
+                    break;
                 }
                 case flag_0: {
                     if (mode == 1) {
@@ -55,12 +56,13 @@ public class RandomWritter {
                     } else {
                         System.out.println("Complete sentence already disabled.");
                     }
+                    break;
                 }
                 default: {
                     System.out.println("Unable to open that file.  Try again.");
                 }
             }
-            System.out.println("input file name? ");
+            System.out.print("input file name? ");
             filename = input.nextLine();
             fileaddr = "src/main/text/" + filename;
             file = new File(fileaddr);
@@ -188,7 +190,6 @@ public class RandomWritter {
                         } else {
                             temp = " ";
                             while (temp.charAt(0) < 'A' || temp.charAt(0) > 'Z') {
-                                System.out.println(System.currentTimeMillis());
                                 random = (int) Math.abs(System.currentTimeMillis() % sum);
                                 ite2 = hits.entrySet().iterator();
                                 int i = 0;
