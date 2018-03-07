@@ -136,10 +136,7 @@ public class RandomWritter {
             }
 
             //fileLen++;
-            hitTimes = hits.get(temp);
-            if (hitTimes == null) {
-                hits.put(temp, 1);
-            } else hits.put(temp, hitTimes + 1);
+            hits.putIfAbsent(temp, 0);
 
             long t2 = System.currentTimeMillis();
             System.out.print("Time consumed: ");
