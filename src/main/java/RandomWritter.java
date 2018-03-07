@@ -92,9 +92,9 @@ public class RandomWritter {
 
             //int fileLen = 0;
             Hashtable<String, Hashtable<String, Integer>> grams =
-                    new Hashtable<String, Hashtable<String, Integer>>();
-            Hashtable<String, Integer> hits = new Hashtable<String, Integer>();
-            Queue<Integer> length = new LinkedList<Integer>();
+                    new Hashtable<>();
+            Hashtable<String, Integer> hits = new Hashtable<>();
+            Queue<Integer> length = new LinkedList<>();
             String temp = "";
             String buffer;
             long t1 = System.currentTimeMillis();
@@ -117,7 +117,7 @@ public class RandomWritter {
 
                 hittie = grams.get(temp);
                 if (hittie == null) {
-                    hittie = new Hashtable<String, Integer>();
+                    hittie = new Hashtable<>();
                     hittie.put(buffer, 1);
                     grams.put(temp, hittie);
                 } else {
@@ -138,8 +138,9 @@ public class RandomWritter {
             //fileLen++;
             hitTimes = hits.get(temp);
             if (hitTimes == null) {
-                hits.put(temp, 0);
-            }
+                hits.put(temp, 1);
+            } else hits.put(temp, hitTimes + 1);
+
             long t2 = System.currentTimeMillis();
             System.out.print("Time consumed: ");
             System.out.print(t2 - t1);
@@ -168,9 +169,9 @@ public class RandomWritter {
                         int random;
                         if (sum == 0) break; // n >= file length;
                         //if (len > fileLen) break; //len > file length;
-                        Iterator<Entry<String, Integer>> ite1 = null;
-                        Iterator<Entry<String, Integer>> ite2 = null;
-                        Entry<String, Integer> e1 = null;
+                        Iterator<Entry<String, Integer>> ite1;
+                        Iterator<Entry<String, Integer>> ite2;
+                        Entry<String, Integer> e1;
                         Entry<String, Integer> e2 = null;
                         if (mode == 0) {
                             int hit = 0;
@@ -203,7 +204,6 @@ public class RandomWritter {
                         }
                         length.clear();
                         String[] s = temp.split(" ");
-                        String test = "";
                         for (int i = 0; i < n[0]; i++) {
                             buffer = s[i];
                             length.offer(buffer.length() + 1);
@@ -260,7 +260,7 @@ public class RandomWritter {
                         System.out.println(" ms");
                         break;
                 }
-                 System.out.println();
+                System.out.println();
                 System.out.print("# of random words to generate (0 to quit)? ");
             }
         } catch (Exception e) {
