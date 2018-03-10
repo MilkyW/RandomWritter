@@ -10,6 +10,8 @@ public class RandomWritter {
     private static final String flag_1 = "-enable complete sentence";
     private static final String flag_0 = "-disable complete sentence";
 
+    public static String out = "";
+
     public static int validNum(String num, int[] n) {
         for (int i = 0; i < num.length(); i++) {
             if (num.charAt(i) > '9' || num.charAt(i) < '0') return 1;
@@ -30,6 +32,10 @@ public class RandomWritter {
     }
 
     public static void main(String[] args) {
+        main();
+    }
+
+    public static void main() {
         int mode = 0;
         System.out.print("input file name? ");
         Scanner input = new Scanner(System.in);
@@ -161,7 +167,6 @@ public class RandomWritter {
                         System.exit(0);
                     case 0:
                         t1 = System.currentTimeMillis();
-                        String out = "";
                         int sum = hits.size();
                         int random;
                         if (sum == 0) break; // n >= file length;
