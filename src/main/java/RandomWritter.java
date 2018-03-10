@@ -10,7 +10,7 @@ public class RandomWritter {
     private static final String flag_1 = "-enable complete sentence";
     private static final String flag_0 = "-disable complete sentence";
 
-    private static int validNum(String num, int[] n) {
+    public static int validNum(String num, int[] n) {
         for (int i = 0; i < num.length(); i++) {
             if (num.charAt(i) > '9' || num.charAt(i) < '0') return 1;
         }
@@ -19,7 +19,7 @@ public class RandomWritter {
         return 0;
     }
 
-    private static int validLen(String num, int[] n) {
+    public static int validLen(String num, int[] n) {
         for (int i = 0; i < num.length(); i++) {
             if (num.charAt(i) > '9' || num.charAt(i) < '0') return 1;
         }
@@ -232,6 +232,7 @@ public class RandomWritter {
                             while (buffer.charAt(buffer.length() - 1) != '.' &&
                                     buffer.charAt(buffer.length() - 1) != '?'
                                     && buffer.charAt(buffer.length() - 1) != '!') {
+                                if (hits.get(temp) == 0) break;
                                 random = (int) Math.abs(System.currentTimeMillis() % hits.get(temp));
                                 ite1 = grams.get(temp).entrySet().iterator();
                                 int j = 0;
