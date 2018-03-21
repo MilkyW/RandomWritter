@@ -1,0 +1,8 @@
+2018-03-21 11:16:06  [ main:0 ] - [ DEBUG ]  This is debug message.
+2018-03-21 11:16:06  [ main:3 ] - [ INFO ]  This is info message.
+2018-03-21 11:16:06  [ main:4 ] - [ INFO ]  This is warn message.
+2018-03-21 11:16:06  [ main:4 ] - [ ERROR ]  This is error message.
+2018-03-21 11:16:25  [ main:0 ] - [ DEBUG ]  This is debug message.
+2018-03-21 11:16:25  [ main:3 ] - [ INFO ]  This is info message.
+2018-03-21 11:16:25  [ main:3 ] - [ INFO ]  This is warn message.
+2018-03-21 11:16:25  [ main:3 ] - [ ERROR ]  This is error message.
