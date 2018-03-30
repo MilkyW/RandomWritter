@@ -1,12 +1,20 @@
+package com.wxr;
+
 import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Queue;
-import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+
+import org.apache.log4j.Logger;
 
 public class RandomWritter {
+    private static final Logger LOGGER = Logger.getLogger(RandomWritter.class);
+
     private static final String flag_1 = "-enable complete sentence";
     private static final String flag_0 = "-disable complete sentence";
 
@@ -38,47 +46,56 @@ public class RandomWritter {
     public static void main() {
         int mode = 0;
         System.out.print("input file name? ");
+        //System.out.print(System.getProperty("java.class.path"));
         Scanner input = new Scanner(System.in);
         String filename = input.nextLine();
-        String fileaddr = "src/main/text/" + filename;
-        File file = new File(fileaddr);
-        //System.out.println(file.getAbsolutePath());
-
-        while (!file.exists()) {
-            switch (filename) {
-                case flag_1: {
-                    if (mode == 0) {
-                        mode = 1;
-                        System.out.println("Complete sentence mode enabled.");
-                    } else {
-                        System.out.println("Complete sentence already enabled.");
-                    }
-                    break;
-                }
-                case flag_0: {
-                    if (mode == 1) {
-                        mode = 0;
-                        System.out.println("Complete sentence mode disabled.");
-                    } else {
-                        System.out.println("Complete sentence already disabled.");
-                    }
-                    break;
-                }
-                default: {
-                    System.out.println("Unable to open that file.  Try again.");
-                }
-            }
-            System.out.print("input file name? ");
-            filename = input.nextLine();
-            fileaddr = "src/main/text/" + filename;
-            file = new File(fileaddr);
-        }
+        String fileaddr = "/text/" + filename;
+        InputStream in = RandomWritter.class.getResourceAsStream(fileaddr);
 
         try {
-            Scanner ifile = new Scanner(file);
+            while (in == null) {
+                switch (filename) {
+                    case flag_1: {
+                        if (mode == 0) {
+                            mode = 1;
+                            System.out.println("Complete sentence mode enabled.");
+                        } else {
+                            System.out.println("Complete sentence already enabled.");
+                        }
+                        break;
+                    }
+                    case flag_0: {
+                        if (mode == 1) {
+                            mode = 0;
+                            System.out.println("Complete sentence mode disabled.");
+                        } else {
+                            System.out.println("Complete sentence already disabled.");
+                        }
+                        break;
+                    }
+                    default: {
+                        System.out.println("Unable to open that file.  Try again.");
+                    }
+                }
+                System.out.print("input file name? ");
+                filename = input.nextLine();
+                fileaddr = "/text/" + filename;
+                in = RandomWritter.class.getResourceAsStream(fileaddr);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            LOGGER.error("mode: " + String.valueOf(mode) + '\t'
+                    + "filename: " + filename + '\t'
+                    + "errmsg: " + e.getMessage());
+        }
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        int[] n = new int[1];
+        int[] len = new int[1];
+        try {
+            Scanner ifile = new Scanner(reader);
 
             String num;
-            int[] n = new int[1];
             System.out.print("Value of N? ");
             num = input.nextLine();
 
@@ -149,7 +166,6 @@ public class RandomWritter {
             System.out.print(t2 - t1);
             System.out.println(" ms");
 
-            int[] len = new int[1];
             System.out.println();
             System.out.print("# of random words to generate (0 to quit)? ");
 
@@ -268,6 +284,11 @@ public class RandomWritter {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            LOGGER.error("mode: " + String.valueOf(mode) + '\t'
+                    + "filename: " + filename + '\t'
+                    + "N: " + String.valueOf(n[0]) + '\t'
+                    + "len: " + String.valueOf(len[0]) + '\t'
+                    + "errmsg: " + e.getMessage());
         }
     }
 }
