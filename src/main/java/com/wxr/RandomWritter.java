@@ -10,15 +10,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 public class RandomWritter {
-    private static final Logger LOGGER = Logger.getLogger(RandomWritter.class);
+//private static final Logger LOGGER = Logger.getLogger(RandomWritter.class);
 
     private static final String flag_1 = "-enable complete sentence";
     private static final String flag_0 = "-disable complete sentence";
 
     public static String out = "";
+    public static String err = "";
 
     public static int validNum(String num, int[] n) {
         for (int i = 0; i < num.length(); i++) {
@@ -74,7 +75,8 @@ public class RandomWritter {
                         break;
                     }
                     default: {
-                        System.out.println("Unable to open that file.  Try again.");
+                        err = "Unable to open that file.  Try again.";
+                        System.out.println(err);
                     }
                 }
                 System.out.print("input file name? ");
@@ -83,10 +85,11 @@ public class RandomWritter {
                 in = RandomWritter.class.getResourceAsStream(fileaddr);
             }
         } catch (Exception e) {
+            err = "Unable to open that file.  Try again.";
             System.out.println(e.getMessage());
-            LOGGER.error("mode: " + String.valueOf(mode) + '\t'
-                    + "filename: " + filename + '\t'
-                    + "errmsg: " + e.getMessage());
+//            LOGGER.error("mode: " + String.valueOf(mode) + '\t'
+//                    + "filename: " + filename + '\t'
+//                    + "errmsg: " + e.getMessage());
         }
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -102,13 +105,15 @@ public class RandomWritter {
             while (validNum(num, n) != 0) {
                 switch (validNum(num, n)) {
                     case 1:
-                        System.out.println("Illegal integer format. Try again.");
+                        err = "Illegal integer format of n. Try again.";
+                        System.out.println(err);
                         break;
                     case 2:
-                        System.out.println("N must be 2 or greater.");
+                        err = "n must be 2 or greater.";
+                        System.out.println(err);
                         break;
                 }
-                System.out.print("Value of N? ");
+                System.out.print("Value of n? ");
                 num = input.nextLine();
             }
 
@@ -173,10 +178,12 @@ public class RandomWritter {
                 num = input.nextLine();
                 switch (validLen(num, len)) {
                     case 1:
-                        System.out.println("Illegal integer format. Try again.");
+                        err = "Illegal integer format of len. Try again.";
+                        System.out.println(err);
                         break;
                     case 2:
-                        System.out.println("Must be at least 4 words.");
+                        err = "len must be at least 4 words.";
+                        System.out.println(err);
                         break;
                     case 3:
                         System.out.println("Exiting.");
@@ -284,11 +291,11 @@ public class RandomWritter {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            LOGGER.error("mode: " + String.valueOf(mode) + '\t'
-                    + "filename: " + filename + '\t'
-                    + "N: " + String.valueOf(n[0]) + '\t'
-                    + "len: " + String.valueOf(len[0]) + '\t'
-                    + "errmsg: " + e.getMessage());
+//            LOGGER.error("mode: " + String.valueOf(mode) + '\t'
+//                    + "filename: " + filename + '\t'
+//                    + "N: " + String.valueOf(n[0]) + '\t'
+//                    + "len: " + String.valueOf(len[0]) + '\t'
+//                    + "errmsg: " + e.getMessage());
         }
     }
 }
